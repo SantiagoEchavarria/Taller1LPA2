@@ -5,7 +5,7 @@ import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -19,16 +19,14 @@ public class Prestamo {
 
     @Column(name = "fecha_prestamo", nullable = false)
     @NotNull(message = "La fecha de préstamo es obligatoria")
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
-    private Date fechaPrestamo;
+    private LocalDate fechaPrestamo;
 
     @Column(name = "fecha_devolucion", nullable = false)
     @NotNull(message = "La fecha de devolución es obligatoria")
-    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @FutureOrPresent(message = "La fecha de devolución debe ser hoy o una fecha futura")
-    private Date fechaDevolucion;
+    private LocalDate fechaDevolucion;
 
     @Column(length = 255)
     @Size(max = 255, message = "La observación no puede superar los 255 caracteres")
@@ -43,7 +41,7 @@ public class Prestamo {
     private Usuario usuario;
     
     
-    public Prestamo(Long id, Date fechaPrestamo, Date fechaDevolucion, String observacion, Libro libro,
+    public Prestamo(Long id, LocalDate fechaPrestamo, LocalDate fechaDevolucion, String observacion, Libro libro,
             Usuario usuario) {
         this.id = id;
         this.fechaPrestamo = fechaPrestamo;
@@ -64,19 +62,19 @@ public class Prestamo {
         this.id = id;
     }
 
-    public Date getFechaPrestamo() {
+    public LocalDate getFechaPrestamo() {
         return fechaPrestamo;
     }
 
-    public void setFechaPrestamo(Date fechaPrestamo) {
+    public void setFechaPrestamo(LocalDate fechaPrestamo) {
         this.fechaPrestamo = fechaPrestamo;
     }
 
-    public Date getFechaDevolucion() {
+    public LocalDate getFechaDevolucion() {
         return fechaDevolucion;
     }
 
-    public void setFechaDevolucion(Date fechaDevolucion) {
+    public void setFechaDevolucion(LocalDate fechaDevolucion) {
         this.fechaDevolucion = fechaDevolucion;
     }
 

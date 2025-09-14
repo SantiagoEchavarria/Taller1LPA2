@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head th:replace="~{plantillas/principal :: head}"></head>
+
+<body>
+  <header th:replace="~{plantillas/principal :: header}"></header>
+
+  <div class="container py-4">
+    <div class="card bg-light">
+      <div class="card-header">
+        <h3 class="text-secondary" th:text="${titulo}"></h3>
+      </div>
+      <div class="card-body shadow-lg p-3">
+        <form th:action="@{/libreria/prestamoguardar}" th:object="${prestamo}" method="post">
+
+          <input type="hidden" th:field="*{id}" />
+
+          <div class="mb-3">
+            <label for="fechaPrestamo" class="form-label">Fecha de préstamo</label>
+            <input type="date" th:field="*{fechaPrestamo}" class="form-control" id="fechaPrestamo" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="fechaDevolucion" class="form-label">Fecha de devolución</label>
+            <input type="date" th:field="*{fechaDevolucion}" class="form-control" id="fechaDevolucion" required />
+          </div>
+
+          <div class="mb-3">
+            <label for="libro" class="form-label">Libro</label>
+            <select th:field="*{libro.id}" class="form-select" id="libro" required>
+              <option value="">Seleccione un libro</option>
+              <option th:each="lib : ${libros}" th:value="${lib.id}" th:text="${lib.titulo}"></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="usuario" class="form-label">Usuario</label>
+            <select th:field="*{usuario.id}" class="form-select" id="usuario" required>
+              <option value="">Seleccione un usuario</option>
+              <option th:each="usr : ${usuarios}" th:value="${usr.id}" th:text="${usr.nombreCompleto}"></option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="observacion" class="form-label">Observación</label>
+            <textarea th:field="*{observacion}" class="form-control" id="observacion" rows="3"></textarea>
+          </div>
+
+          <div class="d-flex justify-content-between">
+            <a th:href="@{/libreria/prestamoslistar}" class="btn btn-outline-secondary">
+              <i class="bi bi-arrow-left"></i> Volver
+            </a>
+            <button type="submit" class="btn btn-success">
+              <i class="bi bi-save"></i> Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <footer th:replace="~{plantillas/principal :: footer}"></footer>
+</body>
+
+</html>

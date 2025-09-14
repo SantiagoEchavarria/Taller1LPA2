@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,6 +66,30 @@ public class UsuarioController {
         libreriaService.guardarUsuario(usuario);
         flash.addFlashAttribute("success", "Usuario guardado con éxito");
         status.setComplete();
+        return "redirect:/libreria/usuarioslistar";
+    }
+
+    @GetMapping("/usuarioeditar/{id}")
+    public String editarUsuario(@PathVariable("id") Long id, Model model, RedirectAttributes flash) {
+        Usuario usuario = libreriaService.obtenerUsuarioPorId(id);
+        if (usuario == null) {
+            flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
+            return "redirect:/libreria/usuarioslistar";
+        }
+        model.addAttribute("titulo", "Editar Usuario");
+        model.addAttribute("usuario", usuario);
+        return "usuario/usuarionuevo";
+    }
+
+    @GetMapping("/usuarioeliminar/{id}")
+    public String eliminarUsuario(@PathVariable("id") Long id, RedirectAttributes flash) {
+        Usuario usuario = libreriaService.obtenerUsuarioPorId(id);
+        if (usuario == null) {
+            flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
+            return "redirect:/libreria/usuarioslistar";
+        }
+        libreriaService.eliminarUsuario(id);
+        flash.addFlashAttribute("success", "Usuario eliminado con éxito");
         return "redirect:/libreria/usuarioslistar";
     }
 }

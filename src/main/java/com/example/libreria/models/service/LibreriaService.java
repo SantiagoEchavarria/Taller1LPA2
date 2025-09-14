@@ -1,5 +1,7 @@
 package com.example.libreria.models.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -47,6 +49,11 @@ public class LibreriaService implements LibreriaInterface {
         libroDAO.deleteById(id);
     }
 
+    @Override
+    public List<Libro> listarLibros() {
+        return libroDAO.findAll();
+    }
+
     // USUARIOS
     @Override
     public Page<Usuario> listarUsuarios(Pageable pageable) {
@@ -66,6 +73,11 @@ public class LibreriaService implements LibreriaInterface {
     @Override
     public void eliminarUsuario(Long id) {
         usuarioDAO.deleteById(id);
+    }
+    
+    @Override
+    public List<Usuario> listarUsuarios() {
+        return usuarioDAO.findAll();
     }
 
     // PRESTAMOS
@@ -88,4 +100,10 @@ public class LibreriaService implements LibreriaInterface {
     public void eliminarPrestamo(Long id) {
         prestamoDAO.deleteById(id);
     }
+
+    @Override
+    public List<Prestamo> listarPrestamos() {
+        return prestamoDAO.findAll();
+    }
+    
 }

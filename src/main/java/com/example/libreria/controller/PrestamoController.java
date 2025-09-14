@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,8 @@ public class PrestamoController {
     public String nuevoPrestamo(Model model) {
         model.addAttribute("titulo", "Nuevo Préstamo");
         model.addAttribute("prestamo", new Prestamo());
+        model.addAttribute("libros", libreriaService.listarLibros());
+        model.addAttribute("usuarios", libreriaService.listarUsuarios());
         return "prestamo/prestamonuevo";
     }
 
@@ -58,7 +61,11 @@ public class PrestamoController {
         if (errors.hasErrors()) {
             model.addAttribute("titulo", "Nuevo Préstamo");
             model.addAttribute("prestamo", new Prestamo());
+            model.addAttribute("libros", libreriaService.listarLibros());
+            model.addAttribute("usuarios", libreriaService.listarUsuarios());
             model.addAttribute("error", "Error al guardar el préstamo");
+            errors.getAllErrors().forEach(e -> System.out.println(e.toString()));
+
             return "prestamo/prestamonuevo";
         }
 
@@ -66,5 +73,18 @@ public class PrestamoController {
         flash.addFlashAttribute("success", "Préstamo guardado con éxito");
         status.setComplete();
         return "redirect:/libreria/prestamoslistar";
+    }
+    @GetMapping("/prestamoeditar/{id}")
+    public String editarPrestamo(@PathVariable Long id, Model model, RedirectAttributes flash) {
+        Prestamo prestamo = libreriaService.obtenerPrestamoPorId(id);
+        if (prestamo == null) {
+            flash.addFlashAttribute("error", "El préstamo no existe en la base de datos");
+            return "redirect:/libreria/prestamoslistar";
+        }
+        model.addAttribute("titulo", "Editar Préstamo");
+        model.addAttribute("prestamo", prestamo);
+        model.addAttribute("libros", libreriaService.listarLibros());
+        model.addAttribute("usuarios", libreriaService.listarUsuarios());
+        return "prestamo/prestamonuevo";
     }
 }
