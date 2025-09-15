@@ -1,5 +1,7 @@
 package com.example.libreria.controller;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -12,10 +14,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.libreria.models.entity.Libro;
 import com.example.libreria.models.entity.Prestamo;
 import com.example.libreria.models.service.LibreriaInterface;
 import com.example.libreria.utils.paginator.PageRender;
@@ -64,8 +68,14 @@ public class PrestamoController {
             model.addAttribute("libros", libreriaService.listarLibros());
             model.addAttribute("usuarios", libreriaService.listarUsuarios());
             model.addAttribute("error", "Error al guardar el préstamo");
-            errors.getAllErrors().forEach(e -> System.out.println(e.toString()));
-
+            return "prestamo/prestamonuevo";
+        }
+        if (libreriaService.numeroPrestamosPorUsuario(prestamo.getUsuario().getId()) >= 5) {
+            model.addAttribute("titulo", "Nuevo Préstamo");
+            model.addAttribute("prestamo", new Prestamo());
+            model.addAttribute("libros", libreriaService.listarLibros());
+            model.addAttribute("usuarios", libreriaService.listarUsuarios());
+            model.addAttribute("error", "El usuario ya tiene 5 préstamos activos. No puede realizar más préstamos.");
             return "prestamo/prestamonuevo";
         }
 
@@ -86,5 +96,22 @@ public class PrestamoController {
         model.addAttribute("libros", libreriaService.listarLibros());
         model.addAttribute("usuarios", libreriaService.listarUsuarios());
         return "prestamo/prestamonuevo";
+    }
+    @GetMapping("/prestamoeliminar/{id}")
+    public String eliminarPrestamo(@PathVariable Long id, RedirectAttributes flash) {
+        Prestamo prestamo = libreriaService.obtenerPrestamoPorId(id);
+        if (prestamo != null) {
+            libreriaService.eliminarPrestamo(id);
+            flash.addFlashAttribute("success", "Préstamo eliminado con éxito");
+        } else {
+            flash.addFlashAttribute("error", "El préstamo no existe en la base de datos");
+        }
+        return "redirect:/libreria/prestamoslistar";
+    }
+
+    @GetMapping("/cargarproductos/{id}/{term}")
+    @ResponseBody
+    public List<Libro> cargarLibros(@PathVariable Long id, @PathVariable String term) {
+        return libreriaService.buscarLibroPorTituloYUsuario(term, id);
     }
 }

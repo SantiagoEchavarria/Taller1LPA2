@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "libros")
 public class Libro {
@@ -42,6 +44,7 @@ public class Libro {
 
 
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore //Esto es para evitar la recursividad infinita al serializar a JSON
     private List<Prestamo> prestamos;
 
     

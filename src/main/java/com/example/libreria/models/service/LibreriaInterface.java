@@ -30,5 +30,8 @@ public interface LibreriaInterface{
     public void guardarPrestamo(Prestamo prestamo);
     public Prestamo obtenerPrestamoPorId(Long id);
     public void eliminarPrestamo(Long id);
+    public Long numeroPrestamosPorUsuario(Long usuarioId);
+    public List<Libro> buscarLibrosPrestadosPorUsuario(Long usuarioId);
+    public List<Libro> buscarLibroPorTituloYUsuario(String titulo, Long usuarioId);
     
 }

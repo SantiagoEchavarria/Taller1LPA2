@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{plantillas/principal :: head}"></head>
+<script th:replace="~{plantillas/autocompletalibro :: script}"></script>
+
+<body>
+<header th:replace="~{plantillas/principal :: header}"></header>
+<div class="container py-4 cw-60">
+    <div class="card bg-light">
+        <div class="card-header">
+            <h3 class="text-secondary" th:text="${titulo}"></h3>
+        </div>
+        <div class="card-body">
+            <h4 class="card-title text-end">
+                <a th:href="@{/libreria/usuarioslistar}" class="btn btn-sm btn-light">&laquo; regresar a usuarios</a>
+            </h4>
+            
+            <!-- Datos del Usuario -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Identificación</label>
+                <div class="col-sm-9">
+                    <input type="text" th:value="${usuario.identificacion}" class="form-control" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Nombre Completo</label>
+                <div class="col-sm-9">
+                    <input type="text" th:value="${usuario.nombreCompleto}" class="form-control" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Teléfono Móvil</label>
+                <div class="col-sm-9">
+                    <input type="text" th:value="${usuario.telefonoMovil}" class="form-control" disabled="disabled"/>
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Correo Electrónico</label>
+                <div class="col-sm-9">
+                    <input type="email" th:value="${usuario.correoElectronico}" class="form-control" disabled="disabled"/>
+                </div>
+            </div>
+            
+            <input type="hidden" id="usuario_id" th:value="${usuario.id}"/>
+            <input type="text" id="buscar_libro" class="form-control" placeholder="Buscar libro...">
+            <div id="sugerencias" class="sugerencias-list" style="display:none"></div>
+
+
+            <!-- Libros Prestados -->
+            <h5 class="mt-4 text-secondary">Libros Prestados</h5>
+            <table class="table table-striped table-sm table-hover table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th class="text-secondary">Título</th>
+                        <th class="text-secondary">Autor</th>
+                        <th class="text-secondary">Fecha Préstamo</th>
+                        <th class="text-secondary">Fecha Devolución</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="libro : ${libros}">
+                        <td th:text="${libro.titulo}"></td>
+                        <td th:text="${libro.autor}"></td>
+                       
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(libros)}">
+                        <td colspan="4" class="text-center text-muted">El usuario no tiene libros prestados</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{plantillas/principal :: footer}"></footer>
+</body>
+</html>

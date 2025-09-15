@@ -9,6 +9,8 @@ import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "prestamos")
 public class Prestamo {
@@ -34,6 +36,7 @@ public class Prestamo {
 
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
+    @JsonIgnore //Estfo es para evitar la recursividad infinita al serializar a JSON
     private Libro libro;
 
     @ManyToOne

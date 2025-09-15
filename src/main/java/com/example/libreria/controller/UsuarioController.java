@@ -92,5 +92,19 @@ public class UsuarioController {
         flash.addFlashAttribute("success", "Usuario eliminado con éxito");
         return "redirect:/libreria/usuarioslistar";
     }
+
+    @GetMapping("/usuariover/{id}")
+    public String verUsuario(@PathVariable("id") Long id, Model model, RedirectAttributes
+            flash) {
+        Usuario usuario = libreriaService.obtenerUsuarioPorId(id);
+        if (usuario == null) {
+            flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
+            return "redirect:/libreria/usuarioslistar";
+        }
+        model.addAttribute("titulo", "Detalle del Usuario");
+        model.addAttribute("usuario", usuario);
+        model.addAttribute("libros", libreriaService.buscarLibrosPrestadosPorUsuario(usuario.getId()));
+        return "usuario/usuariover";
+    }
 }
 

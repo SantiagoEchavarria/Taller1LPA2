@@ -105,5 +105,20 @@ public class LibreriaService implements LibreriaInterface {
     public List<Prestamo> listarPrestamos() {
         return prestamoDAO.findAll();
     }
+
+    @Override
+    public Long numeroPrestamosPorUsuario(Long usuarioId) {
+        return prestamoDAO.numeroPrestamosPorUsuario(usuarioId);
+    }
+
+    @Override
+    public List<Libro> buscarLibrosPrestadosPorUsuario(Long usuarioId) {
+        return prestamoDAO.buscarLibrosPrestadosPorUsuario(usuarioId);
+    }
+
+    @Override
+    public List<Libro> buscarLibroPorTituloYUsuario(String titulo, Long usuarioId) {
+        return prestamoDAO.buscarLibrosPrestadosPorUsuarioYTitulo(usuarioId, titulo);
+    }
     
 }

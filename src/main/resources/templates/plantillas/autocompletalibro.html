@@ -1,0 +1,59 @@
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script th:fragment="script">
+document.addEventListener('DOMContentLoaded', function(){
+    const buscarLibro = document.getElementById('buscar_libro'); 
+    const sugerencias = document.getElementById('sugerencias'); 
+    const usuarioId = document.getElementById('usuario_id').value; 
+
+    buscarLibro.addEventListener('input', async function() {
+        const term = buscarLibro.value;
+
+        if (term.length === 0) {
+            sugerencias.style.display = 'none';
+            return;
+        }
+
+        try {
+            const response = await axios.get(`/libreria/cargarproductos/${usuarioId}/${term}`);
+            mostrarSugerencias(response.data);
+            console.log('Libros recuperados:', response.data);
+        } catch (error) {
+            console.error('Error recuperando libros:', error);
+        }
+    });
+
+    function mostrarSugerencias(data) {
+        sugerencias.innerHTML = '';
+        if (data.length === 0) {
+            sugerencias.style.display = 'none';
+            return;
+        }
+
+        data.forEach(item => {
+            const div = document.createElement('div');
+            div.classList.add('sugerencia-item');
+            div.textContent = item.titulo + " - " + item.autor; // ajusta al modelo Libro
+            div.addEventListener('click', function() {
+                selectSugerencia(item);
+            });
+            sugerencias.appendChild(div);
+        });
+
+        sugerencias.style.display = 'block';
+    } 
+
+    function selectSugerencia(item) {
+        // Aquí puedes hacer lo que necesites al seleccionar un libro
+        buscarLibro.value = item.titulo; 
+        sugerencias.style.display = 'none';
+    }
+
+    document.addEventListener('click', function(event) {
+        if (!sugerencias.contains(event.target) && event.target !== buscarLibro) {
+            sugerencias.style.display = 'none';
+        }
+    });
+});
+</script>
