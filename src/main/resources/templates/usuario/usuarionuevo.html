@@ -19,24 +19,25 @@
 						<div class="mb-3">
 							<label for="identificacion" class="form-label">Identificación</label>
 							<input type="text" th:field="*{identificacion}" class="form-control" id="identificacion" required>
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('identificacion')}" th:errors="*{identificacion}"></div>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('identificacion')}" th:errors="*{identificacion}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="telefonoMovil" class="form-label">Teléfono Móvil</label>
 							<input type="text" th:field="*{telefonoMovil}" class="form-control" id="telefonoMovil">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('telefonoMovil')}" th:errors="*{telefonoMovil}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="nombreCompleto" class="form-label">Nombre Completo</label>
 							<input type="text" th:field="*{nombreCompleto}" class="form-control" id="nombreCompleto" required>
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('nombreCompleto')}" th:errors="*{nombreCompleto}"></div>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('nombreCompleto')}" th:errors="*{nombreCompleto}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="correoElectronico" class="form-label">Correo Electrónico</label>
 							<input type="email" th:field="*{correoElectronico}" class="form-control" id="correoElectronico" required>
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('correoElectronico')}" th:errors="*{correoElectronico}"></div>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('correoElectronico')}" th:errors="*{correoElectronico}"></small>
 						</div>
 
 						<div class="d-flex justify-content-between">

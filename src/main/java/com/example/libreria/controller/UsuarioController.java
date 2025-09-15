@@ -58,7 +58,7 @@ public class UsuarioController {
                                  SessionStatus status, RedirectAttributes flash) {
         if (errors.hasErrors()) {
             model.addAttribute("titulo", "Nuevo Usuario");
-            model.addAttribute("usuario", new Usuario());
+            //model.addAttribute("usuario", new Usuario());
             model.addAttribute("error", "Error al guardar el usuario");
             return "usuario/usuarionuevo";
         }

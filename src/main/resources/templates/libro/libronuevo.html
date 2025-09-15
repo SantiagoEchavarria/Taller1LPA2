@@ -19,33 +19,37 @@
 						<div class="mb-3">
 							<label for="isbn" class="form-label">ISBN</label>
 							<input type="text" th:field="*{isbn}" class="form-control" id="isbn" placeholder="Ej: 978-1234567890" required>
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></div>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="titulo" class="form-label">Título</label>
 							<input type="text" th:field="*{titulo}" class="form-control" id="titulo" required>
-							<div class="invalid-feedback" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="autor" class="form-label">Autor</label>
 							<input type="text" th:field="*{autor}" class="form-control" id="autor">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="editorial" class="form-label">Editorial</label>
 							<input type="text" th:field="*{editorial}" class="form-control" id="editorial">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('editorial')}" th:errors="*{editorial}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="anio" class="form-label">Año</label>
 							<input type="text" th:field="*{anio}" class="form-control" id="anio" maxlength="10">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('anio')}" th:errors="*{anio}"></small>
 						</div>
 
 						<div class="mb-3">
 							<label for="edicion" class="form-label">Edición</label>
 							<input type="text" th:field="*{edicion}" class="form-control" id="edicion">
+							<small class="form-text text-danger" th:if="${#fields.hasErrors('edicion')}" th:errors="*{edicion}"></small>
 						</div>
 
 						<div class="d-flex justify-content-between">

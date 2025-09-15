@@ -36,6 +36,10 @@
 							<td th:text="${usuario.nombreCompleto}"></td>
 							<td th:text="${usuario.correoElectronico}"></td>
 							<td>
+								<a th:href="@{'/libreria/usuariover/' + ${usuario.id}}" 
+								   class="btn btn-sm btn-outline-primary">
+									<i class="bi bi-eye"></i> Ver
+								</a>
 								<a th:href="@{'/libreria/usuarioeditar/' + ${usuario.id}}" 
 								   class="btn btn-sm btn-outline-primary">
 									<i class="bi bi-pencil-square"></i> Editar

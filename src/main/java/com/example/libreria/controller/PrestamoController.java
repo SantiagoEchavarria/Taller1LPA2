@@ -64,7 +64,7 @@ public class PrestamoController {
                                   SessionStatus status, RedirectAttributes flash) {
         if (errors.hasErrors()) {
             model.addAttribute("titulo", "Nuevo Préstamo");
-            model.addAttribute("prestamo", new Prestamo());
+           //model.addAttribute("prestamo", new Prestamo());
             model.addAttribute("libros", libreriaService.listarLibros());
             model.addAttribute("usuarios", libreriaService.listarUsuarios());
             model.addAttribute("error", "Error al guardar el préstamo");

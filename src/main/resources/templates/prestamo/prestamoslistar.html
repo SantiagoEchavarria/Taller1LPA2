@@ -21,7 +21,8 @@
 					<thead class="table-dark">
 						<tr>
 							<th>Id</th>
-							<th>Fecha Préstamo</th>
+							<th>Usuario</th>
+							<th>Libro</th>
 							<th>Fecha Devolución</th>
 							<th>Observación</th>
 							<th>Acciones</th>
@@ -30,7 +31,8 @@
 					<tbody>
 						<tr th:each="prestamo : ${prestamos}">
 							<td th:text="${#numbers.formatInteger(prestamo.id, 3)}"></td>
-							<td th:text="${#temporals.format(prestamo.fechaPrestamo, 'dd/MM/yyyy')}"></td>
+							<td th:text="${prestamo.usuario.nombreCompleto}"></td>
+							<td th:text="${prestamo.libro.titulo}"></td>
 							<td th:text="${#temporals.format(prestamo.fechaDevolucion, 'dd/MM/yyyy')}"></td>
 							<td th:text="${prestamo.observacion}"></td>
 							<td>

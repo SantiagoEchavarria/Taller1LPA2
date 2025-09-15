@@ -59,7 +59,7 @@ public class LibroController {
             SessionStatus status, RedirectAttributes flash) {
         if (errors.hasErrors()) {
             model.addAttribute("titulo", "Nuevo Libro");
-            model.addAttribute("libro", new Libro());
+            //model.addAttribute("libro", new Libro());
             model.addAttribute("error", "Error al guardar el libro");
             return "libro/libronuevo";
         }

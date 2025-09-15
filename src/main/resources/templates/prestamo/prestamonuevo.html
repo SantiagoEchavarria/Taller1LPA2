@@ -19,11 +19,13 @@
           <div class="mb-3">
             <label for="fechaPrestamo" class="form-label">Fecha de préstamo</label>
             <input type="date" th:field="*{fechaPrestamo}" class="form-control" id="fechaPrestamo" required />
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('fechaPrestamo')}" th:errors="*{fechaPrestamo}"></small>
           </div>
 
           <div class="mb-3">
             <label for="fechaDevolucion" class="form-label">Fecha de devolución</label>
             <input type="date" th:field="*{fechaDevolucion}" class="form-control" id="fechaDevolucion" required />
+            <small class="form-text text-danger" th:if="${#fields.hasErrors('fechaDevolucion')}" th:errors="*{fechaDevolucion}"></small>
           </div>
 
           <div class="mb-3">
