@@ -47,10 +47,11 @@ public class Libro {
     @JsonIgnore //Esto es para evitar la recursividad infinita al serializar a JSON
     private List<Prestamo> prestamos;
 
-    
+    @Column(nullable = false)
+    private boolean disponible = true;    
 
     public Libro(Long id, String isbn, String titulo, String autor, String editorial, String anio, String edicion,
-            List<Prestamo> prestamos) {
+            List<Prestamo> prestamos, boolean disponible) {
         this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
@@ -59,6 +60,7 @@ public class Libro {
         this.anio = anio;
         this.edicion = edicion;
         this.prestamos = prestamos;
+        this.disponible = disponible;
     }
 
     public Libro() {
@@ -128,12 +130,20 @@ public class Libro {
         this.prestamos = prestamos;
     }
 
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
+
     @Override
     public String toString() {
         return "Libro [id=" + id + ", isbn=" + isbn + ", titulo=" + titulo + ", autor=" + autor + ", editorial="
-                + editorial + ", anio=" + anio + ", edicion=" + edicion + ", prestamos=" + prestamos + "]";
+                + editorial + ", anio=" + anio + ", edicion=" + edicion + ", prestamos=" + prestamos + ", disponible="
+                + disponible + "]";
     }
 
-    // Getters y Setters
 }
 

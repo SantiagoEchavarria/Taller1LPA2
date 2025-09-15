@@ -54,6 +54,11 @@ public class LibreriaService implements LibreriaInterface {
         return libroDAO.findAll();
     }
 
+    @Override
+    public List<Libro> listarLibrosDisponibles() {
+        return libroDAO.findByDisponibleTrue();
+    }
+
     // USUARIOS
     @Override
     public Page<Usuario> listarUsuarios(Pageable pageable) {

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head th:replace="~{plantillas/principal :: head}"></head>
-<script th:replace="~{plantillas/autocompletalibro :: script}"></script>
+<!--<script th:replace="~{plantillas/autocompletalibro :: script}"></script> Fue una idea de busqueda de libros que el usuario tenia prestados,
+pero al solo tner un maximo de 5 me parecio obsoleta dejarlo-->
 
 <body>
 <header th:replace="~{plantillas/principal :: header}"></header>
@@ -43,10 +44,12 @@
                     <input type="email" th:value="${usuario.correoElectronico}" class="form-control" disabled="disabled"/>
                 </div>
             </div>
-            
+            <!--
             <input type="hidden" id="usuario_id" th:value="${usuario.id}"/>
             <input type="text" id="buscar_libro" class="form-control" placeholder="Buscar libro...">
             <div id="sugerencias" class="sugerencias-list" style="display:none"></div>
+            Esto tambien era de la busqueda de libros que el usuario tenia prestados
+            -->
 
 
             <!-- Libros Prestados -->
@@ -58,16 +61,20 @@
                         <th class="text-secondary">Autor</th>
                         <th class="text-secondary">Fecha Préstamo</th>
                         <th class="text-secondary">Fecha Devolución</th>
+                        <th class="text-secondary">Dias restantes</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="libro : ${libros}">
-                        <td th:text="${libro.titulo}"></td>
-                        <td th:text="${libro.autor}"></td>
-                       
+                <tbody id="tabla-libros">
+                    <tr th:each="pres : ${prestamos}">
+                        <td th:text="${pres.libro.titulo}"></td>
+                        <td th:text="${pres.libro.autor}"></td>
+                        <td th:text="${pres.fechaPrestamo}"></td>
+                        <td th:text="${pres.fechaDevolucion}"></td>
+                        <td th:text="${pres.diasRestantes}"></td>
+
                     </tr>
-                    <tr th:if="${#lists.isEmpty(libros)}">
-                        <td colspan="4" class="text-center text-muted">El usuario no tiene libros prestados</td>
+                    <tr th:if="${#lists.isEmpty(prestamos)}">
+                        <td colspan="5" class="text-center text-muted">El usuario no tiene libros prestados</td>
                     </tr>
                 </tbody>
             </table>

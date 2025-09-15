@@ -13,6 +13,7 @@ public interface LibreriaInterface{
     //Metodos de Libro
     public Page<Libro> listarLibros(Pageable pageable);
     public List<Libro> listarLibros();
+    public List<Libro> listarLibrosDisponibles();
     public void guardarLibro(Libro libro);
     public Libro obtenerLibroPorId(Long id);
     public void eliminarLibro(Long id);
@@ -30,6 +31,8 @@ public interface LibreriaInterface{
     public void guardarPrestamo(Prestamo prestamo);
     public Prestamo obtenerPrestamoPorId(Long id);
     public void eliminarPrestamo(Long id);
+    
+        //Los siguientes fueron metodos de prueba solo se usaron como repaso de las clases
     public Long numeroPrestamosPorUsuario(Long usuarioId);
     public List<Libro> buscarLibrosPrestadosPorUsuario(Long usuarioId);
     public List<Libro> buscarLibroPorTituloYUsuario(String titulo, Long usuarioId);

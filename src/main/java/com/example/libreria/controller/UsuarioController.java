@@ -103,7 +103,10 @@ public class UsuarioController {
         }
         model.addAttribute("titulo", "Detalle del Usuario");
         model.addAttribute("usuario", usuario);
-        model.addAttribute("libros", libreriaService.buscarLibrosPrestadosPorUsuario(usuario.getId()));
+        model.addAttribute("prestamos", usuario.getPrestamos());
+        
+        /*model.addAttribute("libros", libreriaService.buscarLibrosPrestadosPorUsuario(usuario.getId()));
+          Fue una logica antigua que deseché por la anterior (mas directa), pero la conservo como nota de estudio*/
         return "usuario/usuariover";
     }
 }

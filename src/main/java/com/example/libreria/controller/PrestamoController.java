@@ -54,7 +54,7 @@ public class PrestamoController {
     public String nuevoPrestamo(Model model) {
         model.addAttribute("titulo", "Nuevo Préstamo");
         model.addAttribute("prestamo", new Prestamo());
-        model.addAttribute("libros", libreriaService.listarLibros());
+        model.addAttribute("libros", libreriaService.listarLibrosDisponibles());
         model.addAttribute("usuarios", libreriaService.listarUsuarios());
         return "prestamo/prestamonuevo";
     }
@@ -78,6 +78,10 @@ public class PrestamoController {
             model.addAttribute("error", "El usuario ya tiene 5 préstamos activos. No puede realizar más préstamos.");
             return "prestamo/prestamonuevo";
         }
+        Libro libro = libreriaService.obtenerLibroPorId(prestamo.getLibro().getId());
+        libro.setDisponible(false);
+        prestamo.setLibro(libro);
+        libreriaService.guardarLibro(libro);
 
         libreriaService.guardarPrestamo(prestamo);
         flash.addFlashAttribute("success", "Préstamo guardado con éxito");
