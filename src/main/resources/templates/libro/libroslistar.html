@@ -28,7 +28,7 @@
 							<th>Editorial</th>
 							<th>Año</th>
 							<th>Edición</th>
-							<th>Acciones</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,7 +40,7 @@
 							<td th:text="${libro.editorial}"></td>
 							<td th:text="${libro.anio}"></td>
 							<td th:text="${libro.edicion}"></td>
-							<td>
+							<td sec:authorize="hasRole('ROLE_ADMIN')">
 								<a th:href="@{'/libreria/libroeditar/' + ${libro.id}}" 
 								   class="btn btn-sm btn-outline-primary">
 									<i class="bi bi-pencil-square"></i> Editar
