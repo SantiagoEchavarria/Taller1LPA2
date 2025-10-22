@@ -21,10 +21,9 @@ REPLACE INTO `libros` (`id`, `anio`, `autor`, `edicion`, `editorial`, `isbn`, `t
 	(7, '1970', 'Puzo', '7', 'Grijalbo', '978-msxccj', 'El padrino', b'0'),
 	(8, '1970', 'Puzo', '7', 'Grijalbo', '979-msxccj', 'El padrino', b'0'),
 	(9, '1970', 'Puzo', '7', 'Grijalbo', '980-msxccj', 'El padrino', b'0'),
-	(10, '1970', 'Puzo', '7', 'Grijalbo', '981-msxccj', 'El padrino', b'0'),
-	(11, '1970', 'Puzo', '7', 'Grijalbo', '448-sdsfsdf', 'El padrino', b'1');
+	(10, '1970', 'Puzo', '7', 'Grijalbo', '981-msxccj', 'El padrino', b'0');
 
--- Volcando datos para la tabla libreria.prestamos: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla libreria.prestamos: ~5 rows (aproximadamente)
 REPLACE INTO `prestamos` (`id`, `fecha_devolucion`, `fecha_prestamo`, `observacion`, `libro_id`, `usuario_id`) VALUES
 	(8, '2025-09-20', '2025-09-15', 'Buena Condición ', 5, 2),
 	(9, '2025-09-19', '2025-09-15', 'Condición regular', 6, 3),
@@ -32,6 +31,16 @@ REPLACE INTO `prestamos` (`id`, `fecha_devolucion`, `fecha_prestamo`, `observaci
 	(11, '2025-09-15', '2025-09-15', 'Condición regular', 8, 2),
 	(12, '2025-09-15', '2025-09-15', 'Condición regular', 9, 2),
 	(13, '2025-09-15', '2025-09-15', 'Condición regular', 10, 2);
+
+-- Volcando datos para la tabla libreria.roles: ~2 rows (aproximadamente)
+REPLACE INTO `roles` (`id`, `nombre`, `usuarior_id`) VALUES
+	(1, 'ROLE_ADMIN', 1),
+	(2, 'ROLE_USER', 2);
+
+-- Volcando datos para la tabla libreria.usuariors: ~2 rows (aproximadamente)
+REPLACE INTO `usuariors` (`id`, `activo`, `clave`, `nombre`) VALUES
+	(1, b'1', '$2a$10$gma3kXYe1NciEGGei.bTsu9VYFDVyyJ0n0/UDgb4/XQBVuC5QWHMu', 'admin'),
+	(2, b'1', '$2a$10$2pqlFztQ5wKUybR5pMX3QOeLwJQId0l7RMpZ/nISWWHWto37Wk6Mu', 'user');
 
 -- Volcando datos para la tabla libreria.usuarios: ~2 rows (aproximadamente)
 REPLACE INTO `usuarios` (`id`, `correo_electronico`, `identificacion`, `nombre_completo`, `telefono_movil`) VALUES

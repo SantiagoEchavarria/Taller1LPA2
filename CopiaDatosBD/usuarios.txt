@@ -1,0 +1,5 @@
+Usuario1: user
+Contrasena: Abc123
+
+Usuario2: admin 
+Contrasena: Abc123
